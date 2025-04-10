@@ -10,7 +10,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Water Monitoring - Delhi</title>
+  <title>Contact Us - Delhi Water Watch</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <script>
@@ -33,14 +33,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-900 text-gray-200 font-sans">
-<!-- Mobile Sidebar -->
+
+<!-- Navbar -->
 <div id="mobileSidebar" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden sm:hidden">
   <div class="absolute left-0 top-0 w-64 h-full bg-gray-800 p-6 space-y-4 shadow-lg transform transition-transform duration-300 translate-x-0">
     <button onclick="toggleSidebar()" class="text-white text-xl absolute top-4 right-4">
       <i class="fas fa-times"></i>
     </button>
     <a href="index.php" class="block text-white text-lg hover:text-blue-400">Home</a>
-    <a href="#monitoring" class="block text-white text-lg hover:text-blue-400">Monitoring</a>
+    <a href="index.php #monitoring" class="block text-white text-lg hover:text-blue-400">Monitoring</a>
     <a href="survey.php" class="block text-white text-lg hover:text-blue-400">Survey</a>
     <a href="contact.php" class="block text-white text-lg hover:text-blue-400">Contact</a>
     <a href="admin.php" class="block text-white text-lg hover:text-blue-400" onclick="return checkAdminAccess()">Admin</a>
@@ -58,7 +59,7 @@
     <!-- Desktop Navbar -->
     <nav id="navbar" class="hidden sm:flex flex-col sm:flex-row sm:space-x-4 sm:items-center w-full sm:w-auto mt-4 sm:mt-0">
       <a href="index.php" class="hover:text-blue-400 font-medium transition block sm:inline">Home</a>
-      <a href="#monitoring" class="hover:text-blue-400 font-medium transition block sm:inline">Monitoring</a>
+      <a href="index.php #monitoring" class="hover:text-blue-400 font-medium transition block sm:inline">Monitoring</a>
       <a href="survey.php" class="hover:text-blue-400 text-blue-300 transition block sm:inline">Survey</a>
       <a href="contact.php" class="text-white font-medium transition block sm:inline">Contact</a>
       <a href="admin.php" class="hover:text-blue-400 font-medium transition block sm:inline" onclick="return checkAdminAccess()">Admin</a>
@@ -78,90 +79,51 @@
   </div>
 </header>
 
-<!-- Hero Section -->
-<section class="relative text-center py-32 bg-cover bg-center bg-no-repeat" style="background-image: url('https://www.crossroadadventure.com/wp-content/uploads/2024/01/Yamuna-Ghat_7-scaled.jpg')">
-  <div class="absolute inset-0 bg-gray-900 opacity-80"></div>
-  <div class="relative z-10 max-w-5xl mx-auto px-4 text-gray-100">
-    <h2 class="text-4xl font-extrabold mb-4">Real-Time Water Monitoring & Survey</h2>
-    <p class="text-lg max-w-2xl mx-auto">Empowering Delhi to track and improve the quality of water bodies through real-time data and community input.</p>
-    <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
-      <a href="#monitoring" class="bg-primary text-white px-6 py-2 rounded-full shadow hover:bg-indigo-700 transition">View Monitoring</a>
-      <a href="survey.php" class="bg-secondary text-white px-6 py-2 rounded-full shadow hover:bg-purple-700 transition">Submit a Survey</a>
-    </div>
-  </div>
-</section>
-
-<!-- Monitoring Section -->
-<section id="monitoring" class="py-16 px-4 bg-gray-900">
-  <div class="max-w-6xl mx-auto">
-    <h3 class="text-3xl font-bold text-white mb-10 text-center"><i class="fa-solid fa-table-columns"></i> Water Quality Dashboard</h3>
-  <?php
-    $csvFile = fopen(__DIR__ . "/WBC_DL_0.csv", "r");
-    if ($csvFile !== FALSE) {
-      $headers = fgetcsv($csvFile);
-      $excludeColumns = ["ward_name", "town_municipality_name"];
-      $includeIndexes = [];
-
-      foreach ($headers as $index => $header) {
-        if (!in_array(trim(strtolower($header)), $excludeColumns)) {
-          $includeIndexes[] = $index;
-        }
-      }
-
-      $includeIndexes = array_slice($includeIndexes, 0, 10);
-      $maxRows = 5;
-      $rowCount = 0;
-
-      while (($row = fgetcsv($csvFile)) !== FALSE && $rowCount < $maxRows) {
-        echo '<div class="mb-8 p-4 rounded-xl border border-gray-600 bg-gray-800 shadow">';
-        echo '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">';
-        foreach ($includeIndexes as $index) {
-          $label = isset($headers[$index]) ? htmlspecialchars($headers[$index]) : "Column $index";
-          $value = isset($row[$index]) ? htmlspecialchars($row[$index]) : "N/A";
-          echo "
-            <div class='p-3 bg-gray-700 rounded-2xl shadow-md hover:bg-gray-600 transition-all duration-300 transform hover:scale-105'>
-              <h4 class='text-xs text-gray-400 font-medium truncate'>{$label}</h4>
-              <p class='text-base font-bold text-blue-400 break-words'>{$value}</p>
-            </div>
-          ";
-        }
-        echo '</div></div>';
-        $rowCount++;
-      }
-
-      fclose($csvFile);
-    } else {
-      echo "<p class='text-red-400'>Error: Unable to read the CSV file.</p>";
-    }
-  ?>
-  </div>
-</section>
-
-<!-- About Section -->
-<section class="max-w-6xl mx-auto py-16 px-4 bg-slate-600 shadow-inner shadow-gray-800 rounded-xl">
-  <h3 class="text-3xl md:text-4xl font-bold text-white mb-10 text-center"><i class="fa-solid fa-circle-info"></i> About the Project</h3>
-  <div class="grid md:grid-cols-2 gap-10 items-center">
+<!-- Contact Section -->
+<section class="max-w-6xl mx-auto py-16 px-4">
+  <h2 class="text-3xl font-bold text-center mb-12 text-white"><i class="fa-solid fa-address-card"></i> Meet the Team</h2>
+  <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
     
-    <!-- Image with Shadow -->
-    <img src="https://static.wixstatic.com/media/6ade0b_d6b74eb90c21457fa89682d573ad8a2f~mv2.jpg" alt="River in Delhi"
-         class="rounded-xl shadow-lg shadow-black/40 w-full h-full max-h-[400px] object-cover">
-
-    <!-- Text Content -->
-    <div class="text-gray-300 space-y-5 text-justify">
-      <p><strong class="text-purple-400">Delhi Water Watch</strong> is a citizen-focused initiative that combines technology, environmental awareness, and data transparency to monitor the health of Delhi's water bodies in real time.</p>
-      <p>By integrating government CSV (e.g., <span class="text-blue-300">data.gov.in</span>), we provide visual dashboards of key water quality parameters like <strong>pH, TDS, DO, BOD</strong>. The platform also collects crowd-sourced insights from the public through a user-friendly survey system.</p>
-      <p>This project empowers residents to engage with water safety data, encouraging collaborative efforts toward environmental conservation and better policy implementation.</p>
-
-      <ul class="list-disc pl-5 text-sm leading-relaxed">
-        <li><strong class="text-green-400">Tech Stack:</strong> HTML, Tailwind CSS, PHP, JavaScript, MySQL</li>
-        <li><strong class="text-green-400">Live Monitoring:</strong> Based on real-time CSV/API feeds</li>
-        <li><strong class="text-green-400">Open Data:</strong> Supports public + government datasets</li>
-      </ul>
+    <!-- Member 1 -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
+      <img src="https://media.licdn.com/dms/image/v2/D5603AQFqFBfgi-xN0g/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1707564979338?e=1749686400&v=beta&t=mr2kcE6JqHkgj8h91DAkLu6mmzIa61_s_6LWicuD3P0" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-primary">
+      <h3 class="text-xl font-semibold text-center text-blue-400">Ayushman Bhattacharya</h3>
+      <p class="text-center text-gray-400 mb-2">Lead Developer</p>
+      <p class="text-center text-sm"><i class="fa-solid fa-envelope mr-2"></i>ayushman.rick007@gmail.com</p>
+      <p class="text-center text-sm"><i class="fa-solid fa-phone mr-2"></i>+91 8167394620</p>
     </div>
+
+    <!-- Member 2 -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
+      <img src="https://media.licdn.com/dms/image/v2/D5603AQFnzZhDy6uXiQ/profile-displayphoto-shrink_400_400/B56ZYQAA1eHoAo-/0/1744025161880?e=1749686400&v=beta&t=waeFYE1Tw79BtdE7XuqZD-g_IPT7Eic2Gdzob-RTwp4" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-secondary">
+      <h3 class="text-xl font-semibold text-center text-purple-400">Hritik Parihar</h3>
+      <p class="text-center text-gray-400 mb-2">UI/UX Designer</p>
+      <p class="text-center text-sm"><i class="fa-solid fa-envelope mr-2"></i>hparihar2005@gmail.com</p>
+      <p class="text-center text-sm"><i class="fa-solid fa-phone mr-2"></i>+91 9906232302</p>
+    </div>
+
+    <!-- Member 3 -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
+      <img src="https://media.licdn.com/dms/image/v2/D4D03AQHtmSVuPC5TAQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1699776886454?e=1749686400&v=beta&t=BMl0VTM5AKQOe_hnawxentyKCWgT0drnkJLOvNX2Bbk" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-accent">
+      <h3 class="text-xl font-semibold text-center text-cyan-400">Priyanshu Jaiswal</h3>
+      <p class="text-center text-gray-400 mb-2">Front-End Developer</p>
+      <p class="text-center text-sm"><i class="fa-solid fa-envelope mr-2"></i>aryanpriyanshu6204@gmail.com</p>
+      <p class="text-center text-sm"><i class="fa-solid fa-phone mr-2"></i>+91 6204894023</p>
+    </div>
+
+    <!-- Member 4 -->
+    <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
+      <img src="https://media.licdn.com/dms/image/v2/D5635AQEomitC_spfUQ/profile-framedphoto-shrink_400_400/B56ZXMKuFBGcAg-/0/1742887117484?e=1744905600&v=beta&t=XF2sv7jvbijAwI-sM8LlppqzcGHwvChmfA_WRV-lxdI" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-gray-500">
+      <h3 class="text-xl font-semibold text-center text-gray-300">Piyush Singh</h3>
+      <p class="text-center text-gray-400 mb-2">Data Analyst</p>
+      <p class="text-center text-sm"><i class="fa-solid fa-envelope mr-2"></i>piyushsenger205@gmail.com</p>
+      <p class="text-center text-sm"><i class="fa-solid fa-phone mr-2"></i>+91 9936693329</p>
+    </div>
+
   </div>
 </section>
 
-
+<!-- Footer -->
  <!-- Break Line -->
  <hr class="border-t border-gray-700 mx-auto w-3/4 my-12">
 
@@ -210,15 +172,10 @@
     }
     return true;
   }
- 
   function toggleSidebar() {
     const sidebar = document.getElementById("mobileSidebar");
     sidebar.classList.toggle("hidden");
   }
-
-  
-
-
 </script>
 </body>
 </html>
