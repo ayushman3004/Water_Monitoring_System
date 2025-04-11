@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 include './db/config.php';
 
 // Get form data
-$username = $_SESSION['email'];
+$username = $_SESSION['username'];
 $location = $_POST['location'];
 $color = $_POST['color'];
 $odor = $_POST['odor'];
