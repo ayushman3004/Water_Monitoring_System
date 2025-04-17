@@ -16,7 +16,7 @@ $odor = $_POST['odor'];
 $waste = isset($_POST['waste']) ? implode(", ", $_POST['waste']) : '';
 $comments = $_POST['comments'];
 
-// Prepare and insert
+// insert
 $sql = "INSERT INTO survey_responses (username, location, color, odor, waste, comments)
         VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($conn, $sql);

@@ -13,6 +13,7 @@
   <title>Water Monitoring - Delhi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -82,7 +83,7 @@
 <section class="relative text-center py-32 bg-cover bg-center bg-no-repeat" style="background-image: url('https://www.crossroadadventure.com/wp-content/uploads/2024/01/Yamuna-Ghat_7-scaled.jpg')">
   <div class="absolute inset-0 bg-gray-900 opacity-80"></div>
   <div class="relative z-10 max-w-5xl mx-auto px-4 text-gray-100">
-    <h2 class="text-4xl font-extrabold mb-4">Real-Time Water Monitoring & Survey</h2>
+    <h2 class="text-4xl font-extrabold mb-4">Real-time survey and monitoring of water bodies in Delhi.</h2>
     <p class="text-lg max-w-2xl mx-auto">Empowering Delhi to track and improve the quality of water bodies through real-time data and community input.</p>
     <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
       <a href="#monitoring" class="bg-primary text-white px-6 py-2 rounded-full shadow hover:bg-indigo-700 transition">View Monitoring</a>
@@ -216,7 +217,39 @@
     sidebar.classList.toggle("hidden");
   }
 
-  
+  $(document).ready(function () {
+
+    // Smooth scroll to #monitoring
+    $(".z-10 h2, .z-10 p, .z-10 .flex").hide().fadeIn(1200);
+
+    $("a[href^='#monitoring']").on("click", function (e) {
+      e.preventDefault();
+      $("html, body").animate({
+        scrollTop: $("#monitoring").offset().top - 60
+      }, 800);
+    });
+
+    // Fade in dashboard cards
+    $("#monitoring .shadow").each(function (i) {
+      $(this).delay(300 * i).fadeIn(600);
+    });
+
+    // About section fade-in on scroll
+    let aboutSection = $(".shadow-inner");
+    aboutSection.css("opacity", "0").css("transition", "opacity 1s ease");
+
+    $(window).on("scroll", function () {
+      const top = $(window).scrollTop();
+      const offset = aboutSection.offset().top - window.innerHeight + 100;
+
+      if (top > offset) {
+        aboutSection.css("opacity", "1");
+      }
+    });
+
+  });
+
+
 
 
 </script>

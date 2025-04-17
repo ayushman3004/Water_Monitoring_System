@@ -95,7 +95,7 @@
 
     <!-- Member 2 -->
     <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
-      <img src="https://media.licdn.com/dms/image/v2/D5603AQFnzZhDy6uXiQ/profile-displayphoto-shrink_400_400/B56ZYQAA1eHoAo-/0/1744025161880?e=1749686400&v=beta&t=waeFYE1Tw79BtdE7XuqZD-g_IPT7Eic2Gdzob-RTwp4" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-secondary">
+      <img src="https://media.licdn.com/dms/image/v2/D5603AQGGKzYgMIkFRQ/profile-displayphoto-shrink_400_400/B56ZYjbFq3HQAg-/0/1744351026516?e=1750291200&v=beta&t=wqnVUllOPmVD8iuyB0iV4NNXaji5s9lXsi9OQlCQ6Zk" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-secondary">
       <h3 class="text-xl font-semibold text-center text-purple-400">Hritik Parihar</h3>
       <p class="text-center text-gray-400 mb-2">UI/UX Designer</p>
       <p class="text-center text-sm"><i class="fa-solid fa-envelope mr-2"></i>hparihar2005@gmail.com</p>

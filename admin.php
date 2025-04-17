@@ -109,7 +109,8 @@ $result = $conn->query($sql);
 
       <tbody class="text-sm divide-y divide-gray-200 dark:divide-gray-700">
         <?php if ($result->num_rows > 0): ?>
-          <?php while($row = $result->fetch_assoc()): ?>
+          <?php while($row = $result->fetch_assoc()): ?>  
+            <!-- fetch_assoc returns the data of database in object form -->
             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
               <td class="px-4 py-3"><?php echo $row['id']; ?></td>
               <td class="px-4 py-3"><?php echo htmlspecialchars($row['username']); ?></td>
