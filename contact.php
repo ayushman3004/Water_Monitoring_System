@@ -93,6 +93,42 @@
 <!-- Contact Section -->
 <section class="max-w-6xl mx-auto py-16 px-4">
   <h2 class="text-3xl font-bold text-center mb-12 text-white"><i class="fa-solid fa-address-card"></i> Meet the Team</h2>
+  
+  <!-- Contact Form Section -->
+  <div class="bg-gray-800 rounded-xl shadow-lg p-8 mb-16">
+    <h3 class="text-2xl font-bold text-center mb-8 text-white"><i class="fa-solid fa-envelope"></i> Get in Touch</h3>
+    <form id="contactForm" class="max-w-2xl mx-auto space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+          <input type="text" id="name" name="name" required
+                 class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-primary transition">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+          <input type="email" id="email" name="email" required
+                 class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-primary transition">
+        </div>
+      </div>
+      <div>
+        <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+        <input type="text" id="subject" name="subject" required
+               class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-primary transition">
+      </div>
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+        <textarea id="message" name="message" rows="4" required
+                  class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-primary transition"></textarea>
+      </div>
+      <div class="text-center">
+        <button type="submit" 
+                class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+          <i class="fa-solid fa-paper-plane mr-2"></i>Send Message
+        </button>
+      </div>
+    </form>
+  </div>
+
   <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
     
     <!-- Member 1 -->
@@ -187,6 +223,32 @@
     const sidebar = document.getElementById("mobileSidebar");
     sidebar.classList.toggle("hidden");
   }
+
+  // Contact Form Submission
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+
+    try {
+      const response = await fetch('submit_contact.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.text();
+      
+      if (response.ok) {
+        alert(result);
+        document.getElementById('contactForm').reset();
+      } else {
+        throw new Error(result);
+      }
+    } catch (error) {
+      alert(error.message || 'Error sending message. Please try again later.');
+      console.error('Error:', error);
+    }
+  });
 </script>
 </body>
 </html>

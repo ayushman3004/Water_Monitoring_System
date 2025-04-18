@@ -18,6 +18,9 @@ require './db/config.php';
 
 $sql = "SELECT * FROM survey_responses ORDER BY submitted_at ASC";
 $result = $conn->query($sql);
+
+$contact_sql = "SELECT * FROM contact_messages ORDER BY created_at DESC";
+$contact_result = $conn->query($contact_sql);
 ?>
 
 <!DOCTYPE html>
@@ -135,12 +138,87 @@ $result = $conn->query($sql);
       </tbody>
     </table>
   </div>
+
+  <!-- Contact Messages Section -->
+  <div class="mt-12">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+      <h2 class="text-3xl font-semibold mb-4 sm:mb-0">📬 Contact Messages</h2>
+      <p class="text-gray-500 dark:text-gray-400 text-sm">Total Messages: <span class="font-semibold"><?php echo $contact_result->num_rows; ?></span></p>
+    </div>
+
+    <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-xl shadow-md">
+      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-purple-600 text-white text-sm">
+          <tr>
+            <th class="px-4 py-3 text-left">ID</th>
+            <th class="px-4 py-3 text-left">Name</th>
+            <th class="px-4 py-3 text-left">Email</th>
+            <th class="px-4 py-3 text-left">Subject</th>
+            <th class="px-4 py-3 text-left">Message</th>
+            <th class="px-4 py-3 text-left">Status</th>
+            <th class="px-4 py-3 text-left">Received At</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm divide-y divide-gray-200 dark:divide-gray-700">
+          <?php if ($contact_result->num_rows > 0): ?>
+            <?php while($row = $contact_result->fetch_assoc()): ?>
+              <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                <td class="px-4 py-3"><?php echo $row['id']; ?></td>
+                <td class="px-4 py-3"><?php echo htmlspecialchars($row['name']); ?></td>
+                <td class="px-4 py-3"><?php echo htmlspecialchars($row['email']); ?></td>
+                <td class="px-4 py-3"><?php echo htmlspecialchars($row['subject']); ?></td>
+                <td class="px-4 py-3 max-w-xs truncate"><?php echo htmlspecialchars($row['message']); ?></td>
+                <td class="px-4 py-3">
+                  <span class="px-2 py-1 rounded-full text-xs <?php echo $row['is_read'] ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'; ?>">
+                    <?php echo $row['is_read'] ? 'Read' : 'Unread'; ?>
+                  </span>
+                  <?php if (!$row['is_read']): ?>
+                    <button onclick="markAsRead(<?php echo $row['id']; ?>)" 
+                            class="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition">
+                      Mark as Read
+                    </button>
+                  <?php endif; ?>
+                </td>
+                <td class="px-4 py-3 whitespace-nowrap"><?php echo $row['created_at']; ?></td>
+              </tr>
+            <?php endwhile; ?>
+          <?php else: ?>
+            <tr><td colspan="7" class="px-4 py-6 text-center text-gray-500">No contact messages found.</td></tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </main>
 
 <script>
    function toggleSidebar() {
     const sidebar = document.getElementById("mobileSidebar");
     sidebar.classList.toggle("hidden");
+  }
+
+  async function markAsRead(messageId) {
+    try {
+      const formData = new FormData();
+      formData.append('message_id', messageId);
+
+      const response = await fetch('update_message_status.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.text();
+      
+      if (response.ok) {
+        // Reload the page to show updated status
+        location.reload();
+      } else {
+        alert('Error: ' + result);
+      }
+    } catch (error) {
+      alert('Error updating message status');
+      console.error('Error:', error);
+    }
   }
 </script>
 </body>
