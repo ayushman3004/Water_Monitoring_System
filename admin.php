@@ -50,8 +50,15 @@ $result = $conn->query($sql);
     <a href="index.php #monitoring" class="block text-white text-lg hover:text-blue-400">Monitoring</a>
     <a href="survey.php" class="block text-white text-lg hover:text-blue-400">Survey</a>
     <a href="contact.php" class="block text-white text-lg hover:text-blue-400">Contact</a>
-    <a href="admin.php" class="block text-white text-lg hover:text-blue-400" onclick="return checkAdminAccess()">Admin</a>
-    <a href="logout.php" class="block text-red-400 mt-4 hover:text-red-500">Logout</a>
+    <a href="admin.php" class="block text-white text-lg hover:text-blue-400">Admin</a>
+    
+    <div class="mt-4 space-y-2 border-t border-gray-700 pt-4">
+      <div class="text-gray-300 font-semibold flex items-center gap-2">
+        <i class="fa-solid fa-user text-lg"></i>
+        <span><?= htmlspecialchars($_SESSION['username']); ?></span>
+      </div>
+      <a href="logout.php" class="block text-red-400 hover:text-red-500 transition">Logout</a>
+    </div>
   </div>
 </div>
 <!-- Navbar -->
@@ -68,12 +75,12 @@ $result = $conn->query($sql);
       <a href="index.php #monitoring" class="hover:text-blue-400 font-medium transition block sm:inline">Monitoring</a>
       <a href="survey.php" class="hover:text-blue-400 text-blue-300 transition block sm:inline">Survey</a>
       <a href="contact.php" class="text-white font-medium transition block sm:inline">Contact</a>
-      <a href="admin.php" class="hover:text-blue-400 font-medium transition block sm:inline" onclick="return checkAdminAccess()">Admin</a>
+      <a href="admin.php" class="hover:text-blue-400 font-medium transition block sm:inline">Admin</a>
 
       <!-- User Menu -->
-      <div class="relative inline-block text-left block sm:inline" onclick="document.getElementById('userMenu').classList.toggle('hidden')">
+      <div class="relative inline-block text-left block sm:inline ml-2" onclick="document.getElementById('userMenu').classList.toggle('hidden')">
         <button class="inline-flex justify-center items-center w-full rounded-full px-4 py-2 bg-gray-700 text-md font-medium text-gray-200 hover:bg-gray-600 transition">
-          <i class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-user mr-2"></i> <?= htmlspecialchars($_SESSION['username']); ?>
         </button>
         <div id="userMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-700 ring-1 ring-black ring-opacity-5 hidden z-50">
           <div class="py-1">

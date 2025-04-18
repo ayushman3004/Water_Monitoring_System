@@ -44,8 +44,17 @@
     <a href="index.php #monitoring" class="block text-white text-lg hover:text-blue-400">Monitoring</a>
     <a href="survey.php" class="block text-white text-lg hover:text-blue-400">Survey</a>
     <a href="contact.php" class="block text-white text-lg hover:text-blue-400">Contact</a>
-    <a href="admin.php" class="block text-white text-lg hover:text-blue-400" onclick="return checkAdminAccess()">Admin</a>
-    <a href="logout.php" class="block text-red-400 mt-4 hover:text-red-500">Logout</a>
+    <?php if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+      <a href="admin.php" class="block text-white text-lg hover:text-blue-400">Admin</a>
+    <?php endif; ?>
+    
+    <div class="mt-4 space-y-2 border-t border-gray-700 pt-4">
+      <div class="text-gray-300 font-semibold flex items-center gap-2">
+        <i class="fa-solid fa-user text-lg"></i>
+        <span><?= htmlspecialchars($_SESSION['username']); ?></span>
+      </div>
+      <a href="logout.php" class="block text-red-400 hover:text-red-500 transition">Logout</a>
+    </div>
   </div>
 </div>
 <!-- Navbar -->
@@ -62,12 +71,14 @@
       <a href="index.php #monitoring" class="hover:text-blue-400 font-medium transition block sm:inline">Monitoring</a>
       <a href="survey.php" class="hover:text-blue-400 text-blue-300 transition block sm:inline">Survey</a>
       <a href="contact.php" class="text-white font-medium transition block sm:inline">Contact</a>
-      <a href="admin.php" class="hover:text-blue-400 font-medium transition block sm:inline" onclick="return checkAdminAccess()">Admin</a>
+      <?php if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+        <a href="admin.php" class="hover:text-blue-400 font-medium transition block sm:inline">Admin</a>
+      <?php endif; ?>
 
       <!-- User Menu -->
-      <div class="relative inline-block text-left block sm:inline" onclick="document.getElementById('userMenu').classList.toggle('hidden')">
+      <div class="relative inline-block text-left block sm:inline ml-2" onclick="document.getElementById('userMenu').classList.toggle('hidden')">
         <button class="inline-flex justify-center items-center w-full rounded-full px-4 py-2 bg-gray-700 text-md font-medium text-gray-200 hover:bg-gray-600 transition">
-          <i class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-user mr-2"></i> <?= htmlspecialchars($_SESSION['username']); ?>
         </button>
         <div id="userMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-700 ring-1 ring-black ring-opacity-5 hidden z-50">
           <div class="py-1">
@@ -95,7 +106,7 @@
 
     <!-- Member 2 -->
     <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
-      <img src="https://media.licdn.com/dms/image/v2/D5603AQFnzZhDy6uXiQ/profile-displayphoto-shrink_400_400/B56ZYQAA1eHoAo-/0/1744025161880?e=1749686400&v=beta&t=waeFYE1Tw79BtdE7XuqZD-g_IPT7Eic2Gdzob-RTwp4" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-secondary">
+      <img src="https://media.licdn.com/dms/image/v2/D5603AQGGKzYgMIkFRQ/profile-displayphoto-shrink_400_400/B56ZYjbFq3HQAg-/0/1744351026516?e=1750291200&v=beta&t=wqnVUllOPmVD8iuyB0iV4NNXaji5s9lXsi9OQlCQ6Zk" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-secondary">
       <h3 class="text-xl font-semibold text-center text-purple-400">Hritik Parihar</h3>
       <p class="text-center text-gray-400 mb-2">UI/UX Designer</p>
       <p class="text-center text-sm"><i class="fa-solid fa-envelope mr-2"></i>hparihar2005@gmail.com</p>
@@ -113,7 +124,7 @@
 
     <!-- Member 4 -->
     <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
-      <img src="https://media.licdn.com/dms/image/v2/D5635AQEomitC_spfUQ/profile-framedphoto-shrink_400_400/B56ZXMKuFBGcAg-/0/1742887117484?e=1744905600&v=beta&t=XF2sv7jvbijAwI-sM8LlppqzcGHwvChmfA_WRV-lxdI" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-gray-500">
+      <img src="https://media.licdn.com/dms/image/v2/D5635AQGpe1PtKRXRuA/profile-framedphoto-shrink_400_400/B56ZZEKkA7HoAc-/0/1744900342245?e=1745560800&v=beta&t=OCgKvgAPRV8RcQGbEKwKHMSXkEhqgeRpS9g6gKxUdFo" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-gray-500">
       <h3 class="text-xl font-semibold text-center text-gray-300">Piyush Singh</h3>
       <p class="text-center text-gray-400 mb-2">Data Analyst</p>
       <p class="text-center text-sm"><i class="fa-solid fa-envelope mr-2"></i>piyushsenger205@gmail.com</p>
