@@ -14,6 +14,7 @@
   <title>Water Monitoring - Delhi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -111,7 +112,7 @@
 <section class="relative text-center py-32 bg-cover bg-center bg-no-repeat" style="background-image: url('https://www.crossroadadventure.com/wp-content/uploads/2024/01/Yamuna-Ghat_7-scaled.jpg')">
   <div class="absolute inset-0 bg-gray-900 opacity-80"></div>
   <div class="relative z-10 max-w-5xl mx-auto px-4 text-gray-100">
-    <h2 class="text-4xl font-extrabold mb-4">Online Real-Time Survey and Monitoring of Water Bodies in Delhi</h2>
+    <h2 class="text-4xl font-extrabold mb-4">Real-Time Water Monitoring & Survey</h2>
     <p class="text-lg max-w-2xl mx-auto">Empowering Delhi to track and improve the quality of water bodies through real-time data and community input.</p>
     <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
       <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -268,6 +269,10 @@
     const sidebar = document.getElementById("mobileSidebar");
     sidebar.classList.toggle("hidden");
   }
+
+  
+
+
 </script>
 </body>
 </html>

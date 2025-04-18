@@ -16,8 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $username;
-        $_SESSION['is_admin'] = $user['is_admin']; // ✅ FIXED
-
+        $_SESSION['is_admin'] = $user['is_admin']; 
         header("location: index.php");
         exit();
     } else {

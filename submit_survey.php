@@ -9,14 +9,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 include './db/config.php';
 
 // Get form data
-$username = $_SESSION['email'];
+$username = $_SESSION['username'];
 $location = $_POST['location'];
 $color = $_POST['color'];
 $odor = $_POST['odor'];
 $waste = isset($_POST['waste']) ? implode(", ", $_POST['waste']) : '';
 $comments = $_POST['comments'];
 
-// Prepare and insert
+// insert
 $sql = "INSERT INTO survey_responses (username, location, color, odor, waste, comments)
         VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($conn, $sql);
