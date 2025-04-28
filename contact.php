@@ -160,7 +160,8 @@
 
     <!-- Member 4 -->
     <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
-      <img src="https://media.licdn.com/dms/image/v2/D5635AQGpe1PtKRXRuA/profile-framedphoto-shrink_400_400/B56ZZEKkA7HoAc-/0/1744900342245?e=1745560800&v=beta&t=OCgKvgAPRV8RcQGbEKwKHMSXkEhqgeRpS9g6gKxUdFo" alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-gray-500">
+      <img src="https://media.licdn.com/dms/image/v2/D5635AQGpe1PtKRXRuA/profile-framedphoto-shrink_400_400/B56ZZEKkA7HoAc-/0/1744900342245?e=1746432000&v=beta&t=o13ZGQfddGR0f1giGTvAZqqipjvWOMVo6216a9TsdmA
+      " alt="Team Member" class="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-gray-500">
       <h3 class="text-xl font-semibold text-center text-gray-300">Piyush Singh</h3>
       <p class="text-center text-gray-400 mb-2">Data Analyst</p>
       <p class="text-center text-sm"><i class="fa-solid fa-envelope mr-2"></i>piyushsenger205@gmail.com</p>
@@ -211,14 +212,6 @@
 
 
 <script>
-  function checkAdminAccess() {
-    const isAdmin = <?php echo (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) ? 'true' : 'false'; ?>;
-    if (!isAdmin) {
-      alert("⚠️ Only admins can access this page.");
-      return false;
-    }
-    return true;
-  }
   function toggleSidebar() {
     const sidebar = document.getElementById("mobileSidebar");
     sidebar.classList.toggle("hidden");

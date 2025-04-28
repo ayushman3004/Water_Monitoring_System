@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (!$exists && ($password == $cpassword)) {
-        // $hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (email, password) VALUES ('$username', '$password')";
         $result = mysqli_query($conn, $sql);
         if ($result) {
@@ -47,11 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       background-size: 400% 400%;
     }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50% }
-      50% { background-position: 100% 50% }
-      100% { background-position: 0% 50% }
-    }
+    /*  */
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -142,10 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       const input = document.getElementById("cpassword");
       input.type = input.type === "password" ? "text" : "password";
     }
-    function showLoader() {
-      document.getElementById("spinner").classList.remove("hidden");
-      return true;
-    }
+    
   </script>
 
 </body>

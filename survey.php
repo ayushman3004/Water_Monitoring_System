@@ -208,14 +208,6 @@
 </footer>
 
   <script>
-  function checkAdminAccess() {
-    const isAdmin = <?php echo (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) ? 'true' : 'false'; ?>;
-    if (!isAdmin) {
-      alert("⚠️ Only admins can access this page.");
-      return false;
-    }
-    return true;
-  }
   function toggleSidebar() {
     const sidebar = document.getElementById("mobileSidebar");
     sidebar.classList.toggle("hidden");

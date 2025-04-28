@@ -1,9 +1,7 @@
 <?php 
   session_start();
-  // The commented code below will be used in other restricted pages
-  // Only storing username if we have user data
-  if(isset($row['email'])) {
-    $_SESSION['username'] = $row['email']; 
+  if(isset($user['email'])) {
+    $_SESSION['username'] = $user['email']; 
   }
 ?>
 <!DOCTYPE html>
@@ -37,7 +35,7 @@
 <body class="bg-gray-900 text-gray-200 font-sans">
 <!-- Mobile Sidebar -->
 <div id="mobileSidebar" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden sm:hidden">
-  <div class="absolute left-0 top-0 w-64 h-full bg-gray-800 p-6 space-y-4 shadow-lg transform transition-transform duration-300 translate-x-0">
+  <div class="absolute left-0 top-0 w-64 h-full bg-gray-800 p-6 space-y-4 shadow-lg transform transition-transform duration-300 ">
     <button onclick="toggleSidebar()" class="text-white text-xl absolute top-4 right-4">
       <i class="fas fa-times"></i>
     </button>
@@ -92,7 +90,7 @@
           <button class="inline-flex justify-center items-center w-full rounded-full px-4 py-2 bg-gray-700 text-md font-medium text-gray-200 hover:bg-gray-600 transition">
             <i class="fa-solid fa-user mr-2"></i> <?= htmlspecialchars($_SESSION['username']); ?>
           </button>
-          <div id="userMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-700 ring-1 ring-black ring-opacity-5 hidden z-50">
+          <div id="userMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-700  hidden z-50">
             <div class="py-1">
               <a href="logout.php" class="block px-4 py-2 text-sm text-red-400 hover:bg-red-800 transition">Logout</a>
             </div>
@@ -112,7 +110,11 @@
 <section class="relative text-center py-32 bg-cover bg-center bg-no-repeat" style="background-image: url('https://www.crossroadadventure.com/wp-content/uploads/2024/01/Yamuna-Ghat_7-scaled.jpg')">
   <div class="absolute inset-0 bg-gray-900 opacity-80"></div>
   <div class="relative z-10 max-w-5xl mx-auto px-4 text-gray-100">
-    <h2 class="text-4xl font-extrabold mb-4">Real-Time Water Monitoring & Survey</h2>
+    <h2 class="text-4xl font-extrabold mb-4">Real-Time Survey & Water Monitoring in Delhi
+
+
+    
+    </h2>
     <p class="text-lg max-w-2xl mx-auto">Empowering Delhi to track and improve the quality of water bodies through real-time data and community input.</p>
     <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
       <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
