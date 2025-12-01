@@ -1,0 +1,13 @@
+# FastAPI & Server
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# ML Dependencies
+numpy>=1.24.0
+scikit-learn>=1.0.2
+opencv-python-headless>=4.8.0
+
+# Data (if needed)
+pandas>=1.4.0
