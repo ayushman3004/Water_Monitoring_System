@@ -20,7 +20,7 @@
       $chlorine = floatval($_POST['chlorine']);
 
       // Call FastAPI endpoint
-      $api_url = "http://127.0.0.1:8000/predict";
+      $api_url = "https://fast-api-pani-1.onrender.com/predict";
       $data = [
           "pH" => $ph,
           "Hardness" => $hardness,
@@ -69,7 +69,7 @@
               $error_message = "Invalid file type. Please upload JPG or PNG image.";
           } else {
               // Call FastAPI image endpoint
-              $api_url = "http://127.0.0.1:8000/predict/image";
+              $api_url = "https://fast-api-pani-1.onrender.com/predict/image";
               
               $cfile = new CURLFile($file['tmp_name'], $file['type'], $file['name']);
               
@@ -136,6 +136,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-900 text-gray-200 font-sans antialiased relative">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-24 right-5 z-50 transform transition-all duration-300 translate-x-full opacity-0">
+    <div class="bg-gray-800 border border-blue-500/30 text-blue-400 px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 backdrop-blur-md">
+      <div class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+      </div>
+      <span id="toast-message" class="font-medium">Processing...</span>
+    </div>
+  </div>
 
   <!-- Background Image -->
   <div class="fixed inset-0 z-0">
@@ -247,7 +258,7 @@
             </div>
           <?php else: ?>
 
-          <form action="" method="post" class="space-y-8">
+          <form action="" method="post" class="space-y-8" onsubmit="showToast('Analysing parameters...')">
             <input type="hidden" name="tab" value="params">
             <div class="grid md:grid-cols-2 gap-8">
               
@@ -358,7 +369,7 @@
             </div>
           <?php else: ?>
 
-          <form action="" method="post" enctype="multipart/form-data" class="space-y-8">
+          <form action="" method="post" enctype="multipart/form-data" class="space-y-8" onsubmit="showToast('Image is analysing...')">
             <input type="hidden" name="tab" value="image">
             
             <div class="text-center">
@@ -385,7 +396,7 @@
                 <h4 class="font-medium text-white mb-2"><i class="fas fa-info-circle text-blue-400 mr-2"></i>Detection Capabilities</h4>
                 <ul class="text-sm text-gray-400 space-y-1">
                   <li>• <span class="text-blue-400">Clean Water</span> - Clear, blue-tinted water</li>
-                  <li>• <span class="text-green-400">Algae Presence</span> - Green-tinted water</li>
+                  <!-- <li>• <span class="text-green-400">Algae Presence</span> - Green-tinted water</li> -->
                   <li>• <span class="text-red-400">Pollution</span> - Red/brown-tinted water</li>
                 </ul>
               </div>
@@ -446,6 +457,14 @@
     if (tabParam === 'image') {
       switchTab('image');
     }
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      
+      toastMessage.textContent = message;
+      toast.classList.remove('translate-x-full', 'opacity-0');
+    }
+
   </script>
 
 </body>
